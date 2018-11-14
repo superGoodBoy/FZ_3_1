@@ -1,0 +1,925 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>自动化测试报告,测试结果如下：</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 80%; }
+table       { font-size: 100%; }
+
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="outline"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="detail"
+		}
+	}
+}
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "detail"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "outline"
+        }
+    }
+}
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1>自动化测试报告,测试结果如下：</h1>
+<p class='attribute'><strong>Tester : </strong> GREATEST_QA</p>
+<p class='attribute'><strong>Start Time : </strong> 2018-06-13 09:30:09</p>
+<p class='attribute'><strong>Duration : </strong> 0:06:39.738863</p>
+<p class='attribute'><strong>Status : </strong> ALL 20 Error 20, Passing rate: 0.00%</p>
+
+<p class='description'>用例执行情况：</p>
+</div>
+
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>Summary{ 0.00% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>Failed{ 0 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>Passed{ 0 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>ALL{ 20 }</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
+    <td>Test Group/Test selenium_case</td>
+    <td>Count</td>
+    <td>Pass</td>
+    <td>Fail</td>
+    <td>Error</td>
+    <td>View</td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>voicetemplete_add.UntitledTestCase</td>
+    <td class="text-center">20</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">20</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',20)" class="detail" id='c1'>Detail</a></td>
+</tr>
+
+<tr id='ft1_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_empty</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_1'>error</button>
+    <div id='div_ft1_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_1'>error</button>
+    <div id='div_ft1_1' class="collapse in">
+    <pre>
+    
+ft1_1: [2018-06-13 09:30:11,313]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:30:42,174]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 45, in test_add_empty
+    self.driver.find_element_by_css_selector("body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>error</button>
+    <div id='div_ft1_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_2'>error</button>
+    <div id='div_ft1_2' class="collapse in">
+    <pre>
+    
+ft1_2: [2018-06-13 09:30:46,058]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:31:17,209]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 215, in test_add_success
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addbutton_empty</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_3'>error</button>
+    <div id='div_ft1_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_3'>error</button>
+    <div id='div_ft1_3' class="collapse in">
+    <pre>
+    
+ft1_3: [2018-06-13 09:31:18,755]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:31:49,855]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 62, in test_addbutton_empty
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addchosekey_rule</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_4'>error</button>
+    <div id='div_ft1_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_4'>error</button>
+    <div id='div_ft1_4' class="collapse in">
+    <pre>
+    
+ft1_4: [2018-06-13 09:31:51,352]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:32:22,138]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 130, in test_addchosekey_rule
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addexists</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_5'>error</button>
+    <div id='div_ft1_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_5'>error</button>
+    <div id='div_ft1_5' class="collapse in">
+    <pre>
+    
+ft1_5: [2018-06-13 09:32:23,632]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:32:54,491]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 198, in test_addexists
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_6' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addtemplate_content_empty</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_6'>error</button>
+    <div id='div_ft1_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_6'>error</button>
+    <div id='div_ft1_6' class="collapse in">
+    <pre>
+    
+ft1_6: [2018-06-13 09:32:56,001]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:33:26,881]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 96, in test_addtemplate_content_empty
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_7' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addtemplate_content_rule</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_7'>error</button>
+    <div id='div_ft1_7' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_7'>error</button>
+    <div id='div_ft1_7' class="collapse in">
+    <pre>
+    
+ft1_7: [2018-06-13 09:33:28,352]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:33:59,395]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 181, in test_addtemplate_content_rule
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_8' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addtemplate_key_empty</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_8'>error</button>
+    <div id='div_ft1_8' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_8'>error</button>
+    <div id='div_ft1_8' class="collapse in">
+    <pre>
+    
+ft1_8: [2018-06-13 09:34:03,464]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:34:34,832]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 113, in test_addtemplate_key_empty
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_9' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addtemplate_key_rule</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_9'>error</button>
+    <div id='div_ft1_9' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_9'>error</button>
+    <div id='div_ft1_9' class="collapse in">
+    <pre>
+    
+ft1_9: [2018-06-13 09:34:36,367]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:35:07,199]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 164, in test_addtemplate_key_rule
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_10' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addtemplate_name_empty</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_10'>error</button>
+    <div id='div_ft1_10' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_10'>error</button>
+    <div id='div_ft1_10' class="collapse in">
+    <pre>
+    
+ft1_10: Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 15, in setUp
+    self.driver.maximize_window()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 643, in maximize_window
+    self.execute(command, {"windowHandle": "current"})
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: failed to change window state to maximized, current state is normal
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_11' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addtemplate_name_rule</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_11' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_11'>error</button>
+    <div id='div_ft1_11' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_11' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_11'>error</button>
+    <div id='div_ft1_11' class="collapse in">
+    <pre>
+    
+ft1_11: [2018-06-13 09:35:10,101]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:35:40,764]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 147, in test_addtemplate_name_rule
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_12' class='none'>
+    <td class='errorCase'><div class='testcase'>test_del_empty</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_12' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_12'>error</button>
+    <div id='div_ft1_12' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_12' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_12'>error</button>
+    <div id='div_ft1_12' class="collapse in">
+    <pre>
+    
+ft1_12: [2018-06-13 09:35:42,290]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:35:44,586]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-13 09:35:44,634]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 289, in test_del_empty
+    self.login()
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 33, in login
+    click_btn = driver.find_element_by_css_selector("//*[@id='selectData']/div[4]/div")
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_13' class='none'>
+    <td class='errorCase'><div class='testcase'>test_del_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_13' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_13'>error</button>
+    <div id='div_ft1_13' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_13' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_13'>error</button>
+    <div id='div_ft1_13' class="collapse in">
+    <pre>
+    
+ft1_13: [2018-06-13 09:35:46,248]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:35:48,210]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-13 09:35:48,240]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 298, in test_del_success
+    self.login()
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 33, in login
+    click_btn = driver.find_element_by_css_selector("//*[@id='selectData']/div[4]/div")
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_14' class='none'>
+    <td class='errorCase'><div class='testcase'>test_edit_empty</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_14' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_14'>error</button>
+    <div id='div_ft1_14' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_14' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_14'>error</button>
+    <div id='div_ft1_14' class="collapse in">
+    <pre>
+    
+ft1_14: [2018-06-13 09:35:49,804]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:35:52,272]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-13 09:35:52,335]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 248, in test_edit_empty
+    self.login()
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 33, in login
+    click_btn = driver.find_element_by_css_selector("//*[@id='selectData']/div[4]/div")
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_15' class='none'>
+    <td class='errorCase'><div class='testcase'>test_edit_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_15' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_15'>error</button>
+    <div id='div_ft1_15' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_15' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_15'>error</button>
+    <div id='div_ft1_15' class="collapse in">
+    <pre>
+    
+ft1_15: [2018-06-13 09:35:54,536]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:35:56,464]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-13 09:35:56,483]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 270, in test_edit_success
+    self.login()
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 33, in login
+    click_btn = driver.find_element_by_css_selector("//*[@id='selectData']/div[4]/div")
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_16' class='none'>
+    <td class='errorCase'><div class='testcase'>test_export</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_16' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_16'>error</button>
+    <div id='div_ft1_16' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_16' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_16'>error</button>
+    <div id='div_ft1_16' class="collapse in">
+    <pre>
+    
+ft1_16: [2018-06-13 09:35:57,995]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:36:28,835]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 231, in test_export
+    self.driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[1]/div/button[4]/i").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 368, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"/html/body/div[1]/div[1]/div[1]/div/button[4]/i"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_17' class='none'>
+    <td class='errorCase'><div class='testcase'>test_query_template_id</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_17' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_17'>error</button>
+    <div id='div_ft1_17' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_17' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_17'>error</button>
+    <div id='div_ft1_17' class="collapse in">
+    <pre>
+    
+ft1_17: [2018-06-13 09:36:32,653]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:36:35,184]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-13 09:36:35,219]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 325, in test_query_template_id
+    self.login()
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 33, in login
+    click_btn = driver.find_element_by_css_selector("//*[@id='selectData']/div[4]/div")
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_18' class='none'>
+    <td class='errorCase'><div class='testcase'>test_query_template_key</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_18' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_18'>error</button>
+    <div id='div_ft1_18' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_18' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_18'>error</button>
+    <div id='div_ft1_18' class="collapse in">
+    <pre>
+    
+ft1_18: [2018-06-13 09:36:37,013]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:36:40,669]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-13 09:36:40,707]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 343, in test_query_template_key
+    self.login()
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 33, in login
+    click_btn = driver.find_element_by_css_selector("//*[@id='selectData']/div[4]/div")
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_19' class='none'>
+    <td class='errorCase'><div class='testcase'>test_query_template_name</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_19' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_19'>error</button>
+    <div id='div_ft1_19' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_19' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_19'>error</button>
+    <div id='div_ft1_19' class="collapse in">
+    <pre>
+    
+ft1_19: [2018-06-13 09:36:42,738]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:36:44,414]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-13 09:36:44,462]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 307, in test_query_template_name
+    self.login()
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 33, in login
+    click_btn = driver.find_element_by_css_selector("//*[@id='selectData']/div[4]/div")
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_20' class='none'>
+    <td class='errorCase'><div class='testcase'>test_templatebiaoqian</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_20' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_20'>error</button>
+    <div id='div_ft1_20' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_20' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_20'>error</button>
+    <div id='div_ft1_20' class="collapse in">
+    <pre>
+    
+ft1_20: [2018-06-13 09:36:46,203]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-13 09:36:49,382]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-13 09:36:49,410]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 334, in test_templatebiaoqian
+    self.login()
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\console\case\Integrative_Query\voicetemplete_add.py", line 33, in login
+    click_btn = driver.find_element_by_css_selector("//*[@id='selectData']/div[4]/div")
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>Total</td>
+    <td>20</td>
+    <td>0</td>
+    <td>0</td>
+    <td>20</td>
+    <td>Passing rate: 0.00%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+
+</body>
+</html>

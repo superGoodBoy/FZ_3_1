@@ -1,0 +1,875 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>基础数据测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 80%; }
+table       { font-size: 100%; }
+
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="outline"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="detail"
+		}
+	}
+}
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "detail"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "outline"
+        }
+    }
+}
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1>基础数据测试报告</h1>
+<p class='attribute'><strong>Tester : </strong> QIWEI.REN</p>
+<p class='attribute'><strong>Start Time : </strong> 2018-06-05 14:12:52</p>
+<p class='attribute'><strong>Duration : </strong> 0:06:48.531367</p>
+<p class='attribute'><strong>Status : </strong> ALL 26 Pass 21 Failure 1 Error 4, Passing rate: 80.77%</p>
+
+<p class='description'>用例执行情况:</p>
+</div>
+
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>Summary{ 80.77% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>Failed{ 1 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>Passed{ 21 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>ALL{ 26 }</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
+    <td>Test Group/Test selenium_case</td>
+    <td>Count</td>
+    <td>Pass</td>
+    <td>Fail</td>
+    <td>Error</td>
+    <td>View</td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>unittest.loader._FailedTest</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">2</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',2)" class="detail" id='c1'>Detail</a></td>
+</tr>
+
+<tr id='ft1_1' class='none'>
+    <td class='errorCase'><div class='testcase'>Reporter_HighSelect_test</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_1'>error</button>
+    <div id='div_ft1_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_1'>error</button>
+    <div id='div_ft1_1' class="collapse in">
+    <pre>
+    
+ft1_1: ImportError: Failed to import test module: Reporter_HighSelect_test
+Traceback (most recent call last):
+  File "E:\python3\lib\unittest\loader.py", line 428, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "E:\python3\lib\unittest\loader.py", line 369, in _get_module_from_name
+    __import__(name)
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Authority_case\calling_whitelist\Reporter_HighSelect_test.py", line 8, in &lt;module&gt;
+    import CINTEL_FZweb3_1_1.HTMLTestRunner.HTMLTestReportEN as HTMLTestRunner
+ModuleNotFoundError: No module named 'CINTEL_FZweb3_1_1'
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_2' class='none'>
+    <td class='errorCase'><div class='testcase'>Reporter_exportDocument</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>error</button>
+    <div id='div_ft1_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_2'>error</button>
+    <div id='div_ft1_2' class="collapse in">
+    <pre>
+    
+ft1_2: ImportError: Failed to import test module: Reporter_exportDocument
+Traceback (most recent call last):
+  File "E:\python3\lib\unittest\loader.py", line 428, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "E:\python3\lib\unittest\loader.py", line 369, in _get_module_from_name
+    __import__(name)
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Authority_case\calling_whitelist\Reporter_exportDocument.py", line 14, in &lt;module&gt;
+    import CINTEL_FZweb3_1_1.HTMLTestRunner.HTMLTestReportEN as HTMLTestRunner
+ModuleNotFoundError: No module named 'CINTEL_FZweb3_1_1'
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>Reporter_ImportDocument.ImportDocument</td>
+    <td class="text-center">6</td>
+    <td class="text-center">5</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c2',6)" class="detail" id='c2'>Detail</a></td>
+</tr>
+
+<tr id='pt2_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_expeort_all: 批量导入test：主叫白名单号码模版2018年02月06日14时48分50秒</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_1'>pass</button>
+    <div id='div_pt2_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_1'>pass</button>
+    <div id='div_pt2_1' class="collapse in">
+    <pre>
+    
+pt2_1: [2018-06-05 14:12:54,488]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-05 14:12:56,537]-log.py[line:29]-fuc:__console-INFO: 欢迎[ct_operator]用户，登录成功
+[2018-06-05 14:12:56,690]-log.py[line:29]-fuc:__console-INFO:所在位置：处置任务 &gt; 主叫白名单录入
+成功导入100条记录
+[2018-06-05 14:13:13,196]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_importDocument_allZero: 模板内容全部为空导入验证:主叫白名单号码模版2018年02月06日14时30分16秒</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_2'>pass</button>
+    <div id='div_pt2_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_2'>pass</button>
+    <div id='div_pt2_2' class="collapse in">
+    <pre>
+    
+pt2_2: [2018-06-05 14:13:15,261]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-05 14:13:17,541]-log.py[line:29]-fuc:__console-INFO: 欢迎[ct_operator]用户，登录成功
+[2018-06-05 14:13:17,727]-log.py[line:29]-fuc:__console-INFO:所在位置：处置任务 &gt; 主叫白名单录入
+[2018-06-05 14:13:32,067]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_importDocument_existsNum: 号码已存在导入验证:主叫白名单号码模版2018年02月06日14时48分49秒</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_3'>pass</button>
+    <div id='div_pt2_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_3'>pass</button>
+    <div id='div_pt2_3' class="collapse in">
+    <pre>
+    
+pt2_3: [2018-06-05 14:13:35,630]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-05 14:13:38,588]-log.py[line:29]-fuc:__console-INFO: 欢迎[ct_operator]用户，登录成功
+[2018-06-05 14:13:38,773]-log.py[line:29]-fuc:__console-INFO:所在位置：处置任务 &gt; 主叫白名单录入
+成功导入0条记录
+以下主叫号码数据库中已经存在:
+010243122642 成功导入0条记录
+以下主叫号码数据库中已经存在:
+010243122642
+[2018-06-05 14:13:51,069]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_importDocument_numZero: 导入一条,号码不填,加白原因填写验证:主叫白名单号码模版2018年02月06日14时34分03秒</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_4'>pass</button>
+    <div id='div_pt2_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_4'>pass</button>
+    <div id='div_pt2_4' class="collapse in">
+    <pre>
+    
+pt2_4: [2018-06-05 14:13:52,649]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-05 14:13:55,098]-log.py[line:29]-fuc:__console-INFO: 欢迎[ct_operator]用户，登录成功
+[2018-06-05 14:13:55,271]-log.py[line:29]-fuc:__console-INFO:所在位置：处置任务 &gt; 主叫白名单录入
+[2018-06-05 14:14:09,584]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_importDocument_reasonZero: 导入一条,号码填写,加白原因不填验证:主叫白名单号码模版2018年02月06日14时48分48秒</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_5'>pass</button>
+    <div id='div_pt2_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_5'>pass</button>
+    <div id='div_pt2_5' class="collapse in">
+    <pre>
+    
+pt2_5: [2018-06-05 14:14:11,480]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-05 14:14:14,121]-log.py[line:29]-fuc:__console-INFO: 欢迎[ct_operator]用户，登录成功
+[2018-06-05 14:14:14,306]-log.py[line:29]-fuc:__console-INFO:所在位置：处置任务 &gt; 主叫白名单录入
+[2018-06-05 14:14:28,484]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft2_6' class='none'>
+    <td class='errorCase'><div class='testcase'>test_other_file: 导入.png的文件提示</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft2_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft2_6'>error</button>
+    <div id='div_ft2_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft2_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft2_6'>error</button>
+    <div id='div_ft2_6' class="collapse in">
+    <pre>
+    
+ft2_6: [2018-06-05 14:14:30,417]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-05 14:14:33,079]-log.py[line:29]-fuc:__console-INFO: 欢迎[ct_operator]用户，登录成功
+[2018-06-05 14:14:33,255]-log.py[line:29]-fuc:__console-INFO:所在位置：处置任务 &gt; 主叫白名单录入
+Create Error!
+[2018-06-05 14:15:09,188]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Authority_case\calling_whitelist\Reporter_ImportDocument.py", line 131, in test_other_file
+    lambda driver: self.driver.find_element_by_class_name("layui-layer-content"))
+  File "E:\python3\lib\site-packages\selenium\webdriver\support\wait.py", line 80, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>Reporter_WhiteNumAdd.WhiteNumAdd</td>
+    <td class="text-center">8</td>
+    <td class="text-center">8</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c3',8)" class="detail" id='c3'>Detail</a></td>
+</tr>
+
+<tr id='pt3_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_addnum_empty: 不输入手机号码提示:</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_1'>pass</button>
+    <div id='div_pt3_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_1'>pass</button>
+    <div id='div_pt3_1' class="collapse in">
+    <pre>
+    
+pt3_1: [2018-06-05 14:15:11,190]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+{'addwhitenum': '', 'addwhitereason': ''}
+必填项不能为空
+必填项不能为空 必填项不能为空
+[2018-06-05 14:15:22,928]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_addnum_exists: 已存在号码测试</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_2'>pass</button>
+    <div id='div_pt3_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_2'>pass</button>
+    <div id='div_pt3_2' class="collapse in">
+    <pre>
+    
+pt3_2: [2018-06-05 14:15:24,839]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+{'addwhitenum': '18511318433', 'addwhitereason': 'rqw'}
+白名单已经存在此号码:18511318433 白名单已经存在此号码:18511318433
+[2018-06-05 14:15:39,618]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_addreason_empty: 不输入加白原因提示</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_3'>pass</button>
+    <div id='div_pt3_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_3'>pass</button>
+    <div id='div_pt3_3' class="collapse in">
+    <pre>
+    
+pt3_3: [2018-06-05 14:15:41,442]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+{'addwhitenum': '18511318433', 'addwhitereason': ''}
+必填项不能为空
+必填项不能为空 必填项不能为空
+[2018-06-05 14:15:54,592]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_addwhitenum_success: 验证成功添加用例</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_4'>pass</button>
+    <div id='div_pt3_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_4'>pass</button>
+    <div id='div_pt3_4' class="collapse in">
+    <pre>
+    
+pt3_4: [2018-06-05 14:15:57,992]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+{'addwhitenum': '01033435422642', 'addwhitereason': 'rqw'}
+添加成功 添加成功
+[2018-06-05 14:16:06,420]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_china_reason: 输入加灰原因超长提示</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_5'>pass</button>
+    <div id='div_pt3_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_5'>pass</button>
+    <div id='div_pt3_5' class="collapse in">
+    <pre>
+    
+pt3_5: [2018-06-05 14:16:07,856]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+{'addwhitenum': '1862382322', 'addwhitereason': '#@#4#@#@￥@￥@￥@%#%#￥sfaf#@#4#@#@￥@￥@￥@%#%#￥sfaf%#@#4#@#@￥@￥@￥@%#%#￥sfaf%%'}
+输入原因不能为空且在50字符 以内 ！
+[2018-06-05 14:16:58,516]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_mustbenum: 特殊字符号码提示</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_6'>pass</button>
+    <div id='div_pt3_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_6'>pass</button>
+    <div id='div_pt3_6' class="collapse in">
+    <pre>
+    
+pt3_6: [2018-06-05 14:16:59,843]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+{'addwhitenum': '#@$$$', 'addwhitereason': 'rqw'}
+请输入号码1到30位数字
+请输入号码1到30位数字 请输入号码1到30位数字
+[2018-06-05 14:17:11,396]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_not_toolong_num: 加灰号码输入特长 提示</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_7'>pass</button>
+    <div id='div_pt3_7' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_7'>pass</button>
+    <div id='div_pt3_7' class="collapse in">
+    <pre>
+    
+pt3_7: [2018-06-05 14:17:13,233]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+{'addwhitenum': '186238232218623823221862382322186238232218623823221862382322', 'addwhitereason': '234242'}
+请输入号码1到30位数字
+请输入号码1到30位数字 请输入号码1到30位数字
+[2018-06-05 14:17:25,173]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_not_toolong_reason: 加灰原因输入特长 提示</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_8'>pass</button>
+    <div id='div_pt3_8' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_8'>pass</button>
+    <div id='div_pt3_8' class="collapse in">
+    <pre>
+    
+pt3_8: [2018-06-05 14:17:27,012]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+{'addwhitenum': '18511318322', 'addwhitereason': '186238232218623823221862382322186238232218623823221862382322'}
+输入原因不能为空且在50字符 以内 ！ 输入原因不能为空且在50字符 以内 ！
+[2018-06-05 14:17:37,951]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>Reporter_Whitelist_push.Push</td>
+    <td class="text-center">4</td>
+    <td class="text-center">4</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c4',4)" class="detail" id='c4'>Detail</a></td>
+</tr>
+
+<tr id='pt4_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_nochoice_alreadypush: 已推送不选择直接点击推送按钮</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_1'>pass</button>
+    <div id='div_pt4_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_1'>pass</button>
+    <div id='div_pt4_1' class="collapse in">
+    <pre>
+    
+pt4_1: [2018-06-05 14:17:41,305]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-05 14:17:43,290]-log.py[line:29]-fuc:__console-INFO: 欢迎[ct_operator]用户，登录成功
+[2018-06-05 14:17:43,463]-log.py[line:29]-fuc:__console-INFO:所在位置：处置任务 &gt; 主叫白名单录入
+[2018-06-05 14:17:46,077]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_nochoice_push: 待推送不选择直接点击推送按钮</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_2'>pass</button>
+    <div id='div_pt4_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_2'>pass</button>
+    <div id='div_pt4_2' class="collapse in">
+    <pre>
+    
+pt4_2: [2018-06-05 14:17:47,900]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-05 14:17:49,899]-log.py[line:29]-fuc:__console-INFO: 欢迎[ct_operator]用户，登录成功
+[2018-06-05 14:17:50,080]-log.py[line:29]-fuc:__console-INFO:所在位置：处置任务 &gt; 主叫白名单录入
+[2018-06-05 14:17:53,433]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_select_alreadypush: 已推送选择三条数据点击推送按钮</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_3'>pass</button>
+    <div id='div_pt4_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_3'>pass</button>
+    <div id='div_pt4_3' class="collapse in">
+    <pre>
+    
+pt4_3: [2018-06-05 14:17:54,779]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-05 14:17:56,779]-log.py[line:29]-fuc:__console-INFO: 欢迎[ct_operator]用户，登录成功
+[2018-06-05 14:17:56,967]-log.py[line:29]-fuc:__console-INFO:所在位置：处置任务 &gt; 主叫白名单录入
+[2018-06-05 14:18:00,161]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_selectbox_push: 待推送校验成功提示语，ca_status，匹配推送号码,</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_4'>pass</button>
+    <div id='div_pt4_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_4'>pass</button>
+    <div id='div_pt4_4' class="collapse in">
+    <pre>
+    
+pt4_4: [2018-06-05 14:18:02,000]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-05 14:18:04,535]-log.py[line:29]-fuc:__console-INFO: 欢迎[ct_operator]用户，登录成功
+[2018-06-05 14:18:04,750]-log.py[line:29]-fuc:__console-INFO:所在位置：处置任务 &gt; 主叫白名单录入
+[2018-06-05 14:18:26,241]-log.py[line:31]-fuc:__console-DEBUG:推送前后对比:[('18511318444', 1), ('18511318443', 1), ('18511318442', 1), ('18511318444', 0), ('18511318443', 0), ('18511318442', 0)]
+[2018-06-05 14:18:28,664]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>Reporter_WhitenumDelete.WhitenumDelete</td>
+    <td class="text-center">6</td>
+    <td class="text-center">4</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c5',6)" class="detail" id='c5'>Detail</a></td>
+</tr>
+
+<tr id='pt5_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_del_empty_1</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_1'>pass</button>
+    <div id='div_pt5_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_1'>pass</button>
+    <div id='div_pt5_1' class="collapse in">
+    <pre>
+    
+pt5_1: [2018-06-05 14:18:30,714]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-05 14:18:32,565]-log.py[line:29]-fuc:__console-INFO: 欢迎[ct_operator]用户，登录成功
+[2018-06-05 14:18:32,746]-log.py[line:29]-fuc:__console-INFO:所在位置：处置任务 &gt; 主叫白名单录入
+请选择要删除的行
+[2018-06-05 14:18:38,565]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_del_empty_2: 已推送不选数据直接删除ok</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_2'>pass</button>
+    <div id='div_pt5_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_2'>pass</button>
+    <div id='div_pt5_2' class="collapse in">
+    <pre>
+    
+pt5_2: [2018-06-05 14:18:40,051]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-05 14:18:42,087]-log.py[line:29]-fuc:__console-INFO: 欢迎[ct_operator]用户，登录成功
+[2018-06-05 14:18:42,258]-log.py[line:29]-fuc:__console-INFO:所在位置：处置任务 &gt; 主叫白名单录入
+[2018-06-05 14:18:50,390]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_del_success_1</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_3'>pass</button>
+    <div id='div_pt5_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_3'>pass</button>
+    <div id='div_pt5_3' class="collapse in">
+    <pre>
+    
+pt5_3: [2018-06-05 14:18:52,057]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-05 14:18:53,886]-log.py[line:29]-fuc:__console-INFO: 欢迎[ct_operator]用户，登录成功
+[2018-06-05 14:18:54,150]-log.py[line:29]-fuc:__console-INFO:所在位置：处置任务 &gt; 主叫白名单录入
+18511318441
+删除成功
+()
+
+删除成功 True
+[2018-06-05 14:19:05,720]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft5_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_del_success_2: yi推送删除成功</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft5_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft5_4'>error</button>
+    <div id='div_ft5_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft5_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft5_4'>error</button>
+    <div id='div_ft5_4' class="collapse in">
+    <pre>
+    
+ft5_4: Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Authority_case\calling_whitelist\Reporter_WhitenumDelete.py", line 25, in setUp
+    self.driver.maximize_window()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 643, in maximize_window
+    self.execute(command, {"windowHandle": "current"})
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: failed to change window state to maximized, current state is normal
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft5_5' class='none'>
+    <td class='failCase'><div class='testcase'>test_moreDel_1</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft5_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft5_5'>fail</button>
+    <div id='div_ft5_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft5_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft5_5'>fail</button>
+    <div id='div_ft5_5' class="collapse in">
+    <pre>
+    
+ft5_5: [2018-06-05 14:19:09,155]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-05 14:19:11,076]-log.py[line:29]-fuc:__console-INFO: 欢迎[ct_operator]用户，登录成功
+[2018-06-05 14:19:11,260]-log.py[line:29]-fuc:__console-INFO:所在位置：处置任务 &gt; 主叫白名单录入
+删除成功
+(('18511318433',),)
+[2018-06-05 14:19:23,866]-log.py[line:31]-fuc:__console-DEBUG:18511318433,18511318434,18511318435
+[2018-06-05 14:19:23,868]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Authority_case\calling_whitelist\Reporter_WhitenumDelete.py", line 167, in test_moreDel_1
+    self.assertTrue(realDeltrue)
+AssertionError: False is not true
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_moreDel_2</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_6'>pass</button>
+    <div id='div_pt5_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_6'>pass</button>
+    <div id='div_pt5_6' class="collapse in">
+    <pre>
+    
+pt5_6: [2018-06-05 14:19:25,457]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-05 14:19:27,236]-log.py[line:29]-fuc:__console-INFO: 欢迎[ct_operator]用户，登录成功
+[2018-06-05 14:19:27,457]-log.py[line:29]-fuc:__console-INFO:所在位置：处置任务 &gt; 主叫白名单录入
+删除成功
+()
+[2018-06-05 14:19:41,129]-log.py[line:31]-fuc:__console-DEBUG:18511318444,18511318443,18511318442
+[2018-06-05 14:19:41,130]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>Total</td>
+    <td>26</td>
+    <td>21</td>
+    <td>1</td>
+    <td>4</td>
+    <td>Passing rate: 80.77%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+
+</body>
+</html>

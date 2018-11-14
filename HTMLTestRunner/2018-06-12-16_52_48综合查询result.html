@@ -1,0 +1,2070 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>基础数据测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 80%; }
+table       { font-size: 100%; }
+
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="outline"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="detail"
+		}
+	}
+}
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "detail"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "outline"
+        }
+    }
+}
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1>基础数据测试报告</h1>
+<p class='attribute'><strong>Tester : </strong> QIWEI.REN</p>
+<p class='attribute'><strong>Start Time : </strong> 2018-06-12 16:52:48</p>
+<p class='attribute'><strong>Duration : </strong> 0:22:53.309277</p>
+<p class='attribute'><strong>Status : </strong> ALL 62 Pass 1 Failure 13 Error 48, Passing rate: 1.61%</p>
+
+<p class='description'>用例执行情况:</p>
+</div>
+
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>Summary{ 1.61% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>Failed{ 13 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>Passed{ 1 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>ALL{ 62 }</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
+    <td>Test Group/Test selenium_case</td>
+    <td>Count</td>
+    <td>Pass</td>
+    <td>Fail</td>
+    <td>Error</td>
+    <td>View</td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>intercept_clibarring.intercept_clibarring</td>
+    <td class="text-center">27</td>
+    <td class="text-center">0</td>
+    <td class="text-center">8</td>
+    <td class="text-center">19</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',27)" class="detail" id='c1'>Detail</a></td>
+</tr>
+
+<tr id='ft1_1' class='none'>
+    <td class='failCase'><div class='testcase'>test_number_12</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_1'>fail</button>
+    <div id='div_ft1_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_1'>fail</button>
+    <div id='div_ft1_1' class="collapse in">
+    <pre>
+    
+ft1_1: 查询失败 无数据
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 96, in test_number_12
+    self.assertEqual(no_data,no_data1)
+AssertionError: '查询失败' != '无数据'
+- 查询失败
++ 无数据
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_12</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>error</button>
+    <div id='div_ft1_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_2'>error</button>
+    <div id='div_ft1_2' class="collapse in">
+    <pre>
+    
+ft1_2: 查询失败 无数据
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 740, in tearDown
+    self.assertEqual([], self.verificationErrors)
+AttributeError: 'intercept_clibarring' object has no attribute 'verificationErrors'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_13</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_3'>error</button>
+    <div id='div_ft1_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_3'>error</button>
+    <div id='div_ft1_3' class="collapse in">
+    <pre>
+    
+ft1_3: 89
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 127, in test_number_13
+    time_expcect = getmysql(sql="""
+NameError: name 'getmysql' is not defined
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_13</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_4'>error</button>
+    <div id='div_ft1_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_4'>error</button>
+    <div id='div_ft1_4' class="collapse in">
+    <pre>
+    
+ft1_4: 89
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 740, in tearDown
+    self.assertEqual([], self.verificationErrors)
+AttributeError: 'intercept_clibarring' object has no attribute 'verificationErrors'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_5' class='none'>
+    <td class='failCase'><div class='testcase'>test_number_14</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_5'>fail</button>
+    <div id='div_ft1_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_5'>fail</button>
+    <div id='div_ft1_5' class="collapse in">
+    <pre>
+    
+ft1_5: 查询失败 无数据
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 194, in test_number_14
+    self.assertEqual(no_data1, no_data)
+AssertionError: '无数据' != '查询失败'
+- 无数据
++ 查询失败
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_6' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_14</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_6'>error</button>
+    <div id='div_ft1_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_6'>error</button>
+    <div id='div_ft1_6' class="collapse in">
+    <pre>
+    
+ft1_6: 查询失败 无数据
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 740, in tearDown
+    self.assertEqual([], self.verificationErrors)
+AttributeError: 'intercept_clibarring' object has no attribute 'verificationErrors'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_7' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_15</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_7'>error</button>
+    <div id='div_ft1_7' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_7'>error</button>
+    <div id='div_ft1_7' class="collapse in">
+    <pre>
+    
+ft1_7: 无数据 无数据
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 740, in tearDown
+    self.assertEqual([], self.verificationErrors)
+AttributeError: 'intercept_clibarring' object has no attribute 'verificationErrors'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_8' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_16</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_8'>error</button>
+    <div id='div_ft1_8' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_8'>error</button>
+    <div id='div_ft1_8' class="collapse in">
+    <pre>
+    
+ft1_8: 111
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 274, in test_number_16
+    time_expcect = getmysql(sql="""
+NameError: name 'getmysql' is not defined
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_9' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_16</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_9'>error</button>
+    <div id='div_ft1_9' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_9'>error</button>
+    <div id='div_ft1_9' class="collapse in">
+    <pre>
+    
+ft1_9: 111
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 740, in tearDown
+    self.assertEqual([], self.verificationErrors)
+AttributeError: 'intercept_clibarring' object has no attribute 'verificationErrors'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_10' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_17</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_10'>error</button>
+    <div id='div_ft1_10' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_10'>error</button>
+    <div id='div_ft1_10' class="collapse in">
+    <pre>
+    
+ft1_10: 673
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 322, in test_number_17
+    time_expcect=getmysql(sql="""
+NameError: name 'getmysql' is not defined
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_11' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_17</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_11' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_11'>error</button>
+    <div id='div_ft1_11' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_11' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_11'>error</button>
+    <div id='div_ft1_11' class="collapse in">
+    <pre>
+    
+ft1_11: 673
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 740, in tearDown
+    self.assertEqual([], self.verificationErrors)
+AttributeError: 'intercept_clibarring' object has no attribute 'verificationErrors'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_12' class='none'>
+    <td class='failCase'><div class='testcase'>test_number_18</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_12' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_12'>fail</button>
+    <div id='div_ft1_12' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_12' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_12'>fail</button>
+    <div id='div_ft1_12' class="collapse in">
+    <pre>
+    
+ft1_12: 查询失败 无数据
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 386, in test_number_18
+    self.assertEqual(no_data1, no_data)
+AssertionError: '无数据' != '查询失败'
+- 无数据
++ 查询失败
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_13' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_18</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_13' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_13'>error</button>
+    <div id='div_ft1_13' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_13' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_13'>error</button>
+    <div id='div_ft1_13' class="collapse in">
+    <pre>
+    
+ft1_13: 查询失败 无数据
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 740, in tearDown
+    self.assertEqual([], self.verificationErrors)
+AttributeError: 'intercept_clibarring' object has no attribute 'verificationErrors'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_14' class='none'>
+    <td class='failCase'><div class='testcase'>test_number_19</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_14' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_14'>fail</button>
+    <div id='div_ft1_14' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_14' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_14'>fail</button>
+    <div id='div_ft1_14' class="collapse in">
+    <pre>
+    
+ft1_14: 查询失败 无数据
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 432, in test_number_19
+    self.assertEqual(no_data1, no_data)
+AssertionError: '无数据' != '查询失败'
+- 无数据
++ 查询失败
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_15' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_19</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_15' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_15'>error</button>
+    <div id='div_ft1_15' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_15' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_15'>error</button>
+    <div id='div_ft1_15' class="collapse in">
+    <pre>
+    
+ft1_15: 查询失败 无数据
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 740, in tearDown
+    self.assertEqual([], self.verificationErrors)
+AttributeError: 'intercept_clibarring' object has no attribute 'verificationErrors'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_16' class='none'>
+    <td class='failCase'><div class='testcase'>test_number_20</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_16' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_16'>fail</button>
+    <div id='div_ft1_16' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_16' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_16'>fail</button>
+    <div id='div_ft1_16' class="collapse in">
+    <pre>
+    
+ft1_16: 查询失败 无数据
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 478, in test_number_20
+    self.assertEqual(no_data1, no_data)
+AssertionError: '无数据' != '查询失败'
+- 无数据
++ 查询失败
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_17' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_20</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_17' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_17'>error</button>
+    <div id='div_ft1_17' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_17' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_17'>error</button>
+    <div id='div_ft1_17' class="collapse in">
+    <pre>
+    
+ft1_17: 查询失败 无数据
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 740, in tearDown
+    self.assertEqual([], self.verificationErrors)
+AttributeError: 'intercept_clibarring' object has no attribute 'verificationErrors'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_18' class='none'>
+    <td class='failCase'><div class='testcase'>test_number_21</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_18' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_18'>fail</button>
+    <div id='div_ft1_18' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_18' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_18'>fail</button>
+    <div id='div_ft1_18' class="collapse in">
+    <pre>
+    
+ft1_18: 查询失败 无数据
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 524, in test_number_21
+    self.assertEqual(no_data1, no_data)
+AssertionError: '无数据' != '查询失败'
+- 无数据
++ 查询失败
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_19' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_21</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_19' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_19'>error</button>
+    <div id='div_ft1_19' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_19' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_19'>error</button>
+    <div id='div_ft1_19' class="collapse in">
+    <pre>
+    
+ft1_19: 查询失败 无数据
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 740, in tearDown
+    self.assertEqual([], self.verificationErrors)
+AttributeError: 'intercept_clibarring' object has no attribute 'verificationErrors'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_20' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_22</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_20' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_20'>error</button>
+    <div id='div_ft1_20' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_20' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_20'>error</button>
+    <div id='div_ft1_20' class="collapse in">
+    <pre>
+    
+ft1_20: Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 545, in test_number_22
+    catch_text = self.driver.find_element_by_css_selector(".layui-tab").text
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: chrome not reachable
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_21' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_22</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_21' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_21'>error</button>
+    <div id='div_ft1_21' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_21' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_21'>error</button>
+    <div id='div_ft1_21' class="collapse in">
+    <pre>
+    
+ft1_21: Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 740, in tearDown
+    self.assertEqual([], self.verificationErrors)
+AttributeError: 'intercept_clibarring' object has no attribute 'verificationErrors'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_22' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_23</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_22' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_22'>error</button>
+    <div id='div_ft1_22' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_22' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_22'>error</button>
+    <div id='div_ft1_22' class="collapse in">
+    <pre>
+    
+ft1_22: Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 596, in test_number_23
+    time_expcect = getmysql(sql="""
+NameError: name 'getmysql' is not defined
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_23' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_23</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_23' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_23'>error</button>
+    <div id='div_ft1_23' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_23' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_23'>error</button>
+    <div id='div_ft1_23' class="collapse in">
+    <pre>
+    
+ft1_23: Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 740, in tearDown
+    self.assertEqual([], self.verificationErrors)
+AttributeError: 'intercept_clibarring' object has no attribute 'verificationErrors'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_24' class='none'>
+    <td class='failCase'><div class='testcase'>test_number_24</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_24' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_24'>fail</button>
+    <div id='div_ft1_24' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_24' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_24'>fail</button>
+    <div id='div_ft1_24' class="collapse in">
+    <pre>
+    
+ft1_24: 查询失败 无数据
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 659, in test_number_24
+    self.assertEqual(no_data1, no_data)
+AssertionError: '无数据' != '查询失败'
+- 无数据
++ 查询失败
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_25' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_24</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_25' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_25'>error</button>
+    <div id='div_ft1_25' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_25' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_25'>error</button>
+    <div id='div_ft1_25' class="collapse in">
+    <pre>
+    
+ft1_25: 查询失败 无数据
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 740, in tearDown
+    self.assertEqual([], self.verificationErrors)
+AttributeError: 'intercept_clibarring' object has no attribute 'verificationErrors'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_26' class='none'>
+    <td class='failCase'><div class='testcase'>test_number_25</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_26' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_26'>fail</button>
+    <div id='div_ft1_26' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_26' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_26'>fail</button>
+    <div id='div_ft1_26' class="collapse in">
+    <pre>
+    
+ft1_26: 查询失败 无数据
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 705, in test_number_25
+    self.assertEqual(no_data1, no_data)
+AssertionError: '无数据' != '查询失败'
+- 无数据
++ 查询失败
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_27' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_25</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_27' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_27'>error</button>
+    <div id='div_ft1_27' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_27' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_27'>error</button>
+    <div id='div_ft1_27' class="collapse in">
+    <pre>
+    
+ft1_27: 查询失败 无数据
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\intercept_clibarring.py", line 740, in tearDown
+    self.assertEqual([], self.verificationErrors)
+AttributeError: 'intercept_clibarring' object has no attribute 'verificationErrors'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>original_clibarring.UntitledTestCase</td>
+    <td class="text-center">4</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">3</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c2',4)" class="detail" id='c2'>Detail</a></td>
+</tr>
+
+<tr id='ft2_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_1</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft2_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft2_1'>error</button>
+    <div id='div_ft2_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft2_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft2_1'>error</button>
+    <div id='div_ft2_1' class="collapse in">
+    <pre>
+    
+ft2_1: Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\original_clibarring.py", line 67, in test_number_1
+    time_fact =int(calling_content[all_number])
+IndexError: list index out of range
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft2_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_11</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft2_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft2_2'>error</button>
+    <div id='div_ft2_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft2_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft2_2'>error</button>
+    <div id='div_ft2_2' class="collapse in">
+    <pre>
+    
+ft2_2: Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\original_clibarring.py", line 165, in test_number_11
+    time_expcect = getmysql(sql="""
+NameError: name 'getmysql' is not defined
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_number_23</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_3'>pass</button>
+    <div id='div_pt2_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_3'>pass</button>
+    <div id='div_pt2_3' class="collapse in">
+    <pre>
+    
+pt2_3: 拦截类型为：主叫号码隐藏拦截类型 没有该数据
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft2_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_number_3</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft2_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft2_4'>error</button>
+    <div id='div_ft2_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft2_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft2_4'>error</button>
+    <div id='div_ft2_4' class="collapse in">
+    <pre>
+    
+ft2_4: Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\original_clibarring.py", line 105, in test_number_3
+    time_expcect = getmysql(sql="""
+NameError: name 'getmysql' is not defined
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>remove_greynum_add.UntitledTestCase</td>
+    <td class="text-center">5</td>
+    <td class="text-center">0</td>
+    <td class="text-center">5</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c3',5)" class="detail" id='c3'>Detail</a></td>
+</tr>
+
+<tr id='ft3_1' class='none'>
+    <td class='failCase'><div class='testcase'>test_add_empty</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft3_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft3_1'>fail</button>
+    <div id='div_ft3_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft3_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft3_1'>fail</button>
+    <div id='div_ft3_1' class="collapse in">
+    <pre>
+    
+ft3_1: [2018-06-12 17:05:17,441]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:05:19,807]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:05:20,047]-log.py[line:29]-fuc:__console-INFO:所在位置：综合查询 &gt; 去灰号码
+[2018-06-12 17:05:27,695]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\remove_greynum_add.py", line 73, in test_add_empty
+    self.assertEqual(expec_name, fact_name)
+AssertionError: '必填项不能为空' != '保存'
+- 必填项不能为空
++ 保存
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft3_2' class='none'>
+    <td class='failCase'><div class='testcase'>test_addnum_rule</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft3_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft3_2'>fail</button>
+    <div id='div_ft3_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft3_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft3_2'>fail</button>
+    <div id='div_ft3_2' class="collapse in">
+    <pre>
+    
+ft3_2: [2018-06-12 17:05:30,058]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:05:33,415]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:05:33,660]-log.py[line:29]-fuc:__console-INFO:所在位置：综合查询 &gt; 去灰号码
+[2018-06-12 17:05:43,300]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\remove_greynum_add.py", line 88, in test_addnum_rule
+    self.assertEqual(expec_name, fact_name)
+AssertionError: '添加yicunzi ' != '保存'
+- 添加yicunzi 
++ 保存
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft3_3' class='none'>
+    <td class='failCase'><div class='testcase'>test_login_add_exsits</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft3_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft3_3'>fail</button>
+    <div id='div_ft3_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft3_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft3_3'>fail</button>
+    <div id='div_ft3_3' class="collapse in">
+    <pre>
+    
+ft3_3: [2018-06-12 17:05:45,663]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:05:48,791]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:05:49,076]-log.py[line:29]-fuc:__console-INFO:所在位置：综合查询 &gt; 去灰号码
+[2018-06-12 17:05:58,683]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\remove_greynum_add.py", line 103, in test_login_add_exsits
+    self.assertEqual(expec_name, fact_name)
+AssertionError: '添加yicunzi ' != '保存'
+- 添加yicunzi 
++ 保存
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft3_4' class='none'>
+    <td class='failCase'><div class='testcase'>test_login_add_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft3_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft3_4'>fail</button>
+    <div id='div_ft3_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft3_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft3_4'>fail</button>
+    <div id='div_ft3_4' class="collapse in">
+    <pre>
+    
+ft3_4: [2018-06-12 17:06:00,373]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:06:11,540]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:06:11,795]-log.py[line:29]-fuc:__console-INFO:所在位置：综合查询 &gt; 去灰号码
+[2018-06-12 17:06:29,409]-log.py[line:31]-fuc:__console-DEBUG:(('0',),) (('0',),) () 
+[2018-06-12 17:06:29,411]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\remove_greynum_add.py", line 124, in test_login_add_success
+    self.assertNotEqual(add_before,add_after)
+AssertionError: (('0',),) == (('0',),)
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft3_5' class='none'>
+    <td class='failCase'><div class='testcase'>test_login_add_tips</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft3_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft3_5'>fail</button>
+    <div id='div_ft3_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft3_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft3_5'>fail</button>
+    <div id='div_ft3_5' class="collapse in">
+    <pre>
+    
+ft3_5: [2018-06-12 17:06:32,153]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:06:34,868]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:06:35,103]-log.py[line:29]-fuc:__console-INFO:所在位置：综合查询 &gt; 去灰号码
+[2018-06-12 17:06:44,685]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\remove_greynum_add.py", line 140, in test_login_add_tips
+    self.assertEqual(expec_name,fact_name)
+AssertionError: '添加成功' != '保存'
+- 添加成功
++ 保存
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>remove_greynum_del.UntitledTestCase</td>
+    <td class="text-center">4</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">4</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c4',4)" class="detail" id='c4'>Detail</a></td>
+</tr>
+
+<tr id='ft4_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_del_empty</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft4_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft4_1'>error</button>
+    <div id='div_ft4_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft4_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft4_1'>error</button>
+    <div id='div_ft4_1' class="collapse in">
+    <pre>
+    
+ft4_1: [2018-06-12 17:06:46,297]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:06:48,604]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:06:48,855]-log.py[line:29]-fuc:__console-INFO:所在位置：综合查询 &gt; 去灰号码
+[2018-06-12 17:07:24,147]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\remove_greynum_del.py", line 68, in test_del_empty
+    fact_name = self.driver.find_element_by_class_name("layui-layer-btn0").text
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 488, in find_element_by_class_name
+    return self.find_element(by=By.CLASS_NAME, value=name)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"class name","selector":"layui-layer-btn0"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft4_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_login_add_exsits</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft4_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft4_2'>error</button>
+    <div id='div_ft4_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft4_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft4_2'>error</button>
+    <div id='div_ft4_2' class="collapse in">
+    <pre>
+    
+ft4_2: [2018-06-12 17:07:25,893]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:07:28,085]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:07:28,307]-log.py[line:29]-fuc:__console-INFO:所在位置：综合查询 &gt; 去灰号码
+[2018-06-12 17:07:33,403]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\remove_greynum_del.py", line 75, in test_login_add_exsits
+    self.driver.find_elements_by_id("calling_number")[2].send_keys(grey_numebr)
+IndexError: list index out of range
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft4_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_login_add_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft4_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft4_3'>error</button>
+    <div id='div_ft4_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft4_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft4_3'>error</button>
+    <div id='div_ft4_3' class="collapse in">
+    <pre>
+    
+ft4_3: [2018-06-12 17:07:35,967]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:07:46,673]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:07:47,019]-log.py[line:29]-fuc:__console-INFO:所在位置：综合查询 &gt; 去灰号码
+[2018-06-12 17:07:52,151]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\remove_greynum_del.py", line 88, in test_login_add_success
+    self.driver.find_elements_by_id("calling_number")[2].send_keys(grey_numebr)
+IndexError: list index out of range
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft4_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_login_add_tips</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft4_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft4_4'>error</button>
+    <div id='div_ft4_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft4_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft4_4'>error</button>
+    <div id='div_ft4_4' class="collapse in">
+    <pre>
+    
+ft4_4: [2018-06-12 17:07:54,375]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:07:57,775]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:07:58,056]-log.py[line:29]-fuc:__console-INFO:所在位置：综合查询 &gt; 去灰号码
+[2018-06-12 17:08:03,150]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\remove_greynum_del.py", line 102, in test_login_add_tips
+    self.driver.find_elements_by_id("calling_number")[2].send_keys(grey_numebr)
+IndexError: list index out of range
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>remove_greynum_export.UntitledTestCase</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c5',1)" class="detail" id='c5'>Detail</a></td>
+</tr>
+
+<tr id='ft5_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_export_empty</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft5_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft5_1'>error</button>
+    <div id='div_ft5_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft5_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft5_1'>error</button>
+    <div id='div_ft5_1' class="collapse in">
+    <pre>
+    
+ft5_1: [2018-06-12 17:08:05,266]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:08:07,622]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:08:07,850]-log.py[line:29]-fuc:__console-INFO:所在位置：综合查询 &gt; 去灰号码
+[2018-06-12 17:08:43,152]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\remove_greynum_export.py", line 68, in test_export_empty
+    fact_name = self.driver.find_element_by_class_name("layui-layer-btn0").text
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 488, in find_element_by_class_name
+    return self.find_element(by=By.CLASS_NAME, value=name)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"class name","selector":"layui-layer-btn0"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>voicetemplete_add.UntitledTestCase</td>
+    <td class="text-center">21</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">21</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c6',21)" class="detail" id='c6'>Detail</a></td>
+</tr>
+
+<tr id='ft6_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_empty</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_1'>error</button>
+    <div id='div_ft6_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_1'>error</button>
+    <div id='div_ft6_1' class="collapse in">
+    <pre>
+    
+ft6_1: [2018-06-12 17:08:44,659]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:09:16,080]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 45, in test_add_empty
+    self.driver.find_element_by_css_selector("body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_add_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_2'>error</button>
+    <div id='div_ft6_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_2'>error</button>
+    <div id='div_ft6_2' class="collapse in">
+    <pre>
+    
+ft6_2: [2018-06-12 17:09:17,621]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:09:48,357]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 215, in test_add_success
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addbutton_empty</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_3'>error</button>
+    <div id='div_ft6_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_3'>error</button>
+    <div id='div_ft6_3' class="collapse in">
+    <pre>
+    
+ft6_3: [2018-06-12 17:09:49,884]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:10:20,656]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 62, in test_addbutton_empty
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addchosekey_rule</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_4'>error</button>
+    <div id='div_ft6_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_4'>error</button>
+    <div id='div_ft6_4' class="collapse in">
+    <pre>
+    
+ft6_4: [2018-06-12 17:10:22,230]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:10:52,581]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 130, in test_addchosekey_rule
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addexists</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_5'>error</button>
+    <div id='div_ft6_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_5'>error</button>
+    <div id='div_ft6_5' class="collapse in">
+    <pre>
+    
+ft6_5: [2018-06-12 17:10:54,158]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:11:25,074]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 198, in test_addexists
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_6' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addtemplate_content_empty</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_6'>error</button>
+    <div id='div_ft6_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_6'>error</button>
+    <div id='div_ft6_6' class="collapse in">
+    <pre>
+    
+ft6_6: [2018-06-12 17:11:26,806]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:11:57,730]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 96, in test_addtemplate_content_empty
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_7' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addtemplate_content_rule</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_7'>error</button>
+    <div id='div_ft6_7' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_7'>error</button>
+    <div id='div_ft6_7' class="collapse in">
+    <pre>
+    
+ft6_7: [2018-06-12 17:12:01,991]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:12:32,397]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 181, in test_addtemplate_content_rule
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_8' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addtemplate_key_empty</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_8'>error</button>
+    <div id='div_ft6_8' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_8'>error</button>
+    <div id='div_ft6_8' class="collapse in">
+    <pre>
+    
+ft6_8: [2018-06-12 17:12:33,874]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:13:04,290]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 113, in test_addtemplate_key_empty
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_9' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addtemplate_key_rule</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_9'>error</button>
+    <div id='div_ft6_9' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_9'>error</button>
+    <div id='div_ft6_9' class="collapse in">
+    <pre>
+    
+ft6_9: [2018-06-12 17:13:05,886]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:13:36,682]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 164, in test_addtemplate_key_rule
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_10' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addtemplate_name_empty</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_10'>error</button>
+    <div id='div_ft6_10' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_10'>error</button>
+    <div id='div_ft6_10' class="collapse in">
+    <pre>
+    
+ft6_10: [2018-06-12 17:13:38,703]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:14:09,143]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 79, in test_addtemplate_name_empty
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_11' class='none'>
+    <td class='errorCase'><div class='testcase'>test_addtemplate_name_rule</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_11' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_11'>error</button>
+    <div id='div_ft6_11' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_11' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_11'>error</button>
+    <div id='div_ft6_11' class="collapse in">
+    <pre>
+    
+ft6_11: [2018-06-12 17:14:10,660]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:14:41,447]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 147, in test_addtemplate_name_rule
+    "body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)").click()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.box.box-primary &gt; div:nth-child(2) &gt; div.row-left &gt; div &gt; button:nth-child(1)"}
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_12' class='none'>
+    <td class='errorCase'><div class='testcase'>test_del_empty</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_12' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_12'>error</button>
+    <div id='div_ft6_12' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_12' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_12'>error</button>
+    <div id='div_ft6_12' class="collapse in">
+    <pre>
+    
+ft6_12: [2018-06-12 17:14:43,072]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:14:45,831]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:14:45,864]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 289, in test_del_empty
+    self.login()
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 33, in login
+    click_btn = driver.find_element_by_css_selector("//*[@id='selectData']/div[4]/div")
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_13' class='none'>
+    <td class='errorCase'><div class='testcase'>test_del_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_13' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_13'>error</button>
+    <div id='div_ft6_13' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_13' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_13'>error</button>
+    <div id='div_ft6_13' class="collapse in">
+    <pre>
+    
+ft6_13: [2018-06-12 17:14:47,981]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:14:51,200]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:14:51,236]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 298, in test_del_success
+    self.login()
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 33, in login
+    click_btn = driver.find_element_by_css_selector("//*[@id='selectData']/div[4]/div")
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_14' class='none'>
+    <td class='errorCase'><div class='testcase'>test_edit_empty</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_14' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_14'>error</button>
+    <div id='div_ft6_14' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_14' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_14'>error</button>
+    <div id='div_ft6_14' class="collapse in">
+    <pre>
+    
+ft6_14: [2018-06-12 17:14:52,904]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:14:55,359]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:14:55,378]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 248, in test_edit_empty
+    self.login()
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 33, in login
+    click_btn = driver.find_element_by_css_selector("//*[@id='selectData']/div[4]/div")
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_15' class='none'>
+    <td class='errorCase'><div class='testcase'>test_edit_success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_15' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_15'>error</button>
+    <div id='div_ft6_15' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_15' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_15'>error</button>
+    <div id='div_ft6_15' class="collapse in">
+    <pre>
+    
+ft6_15: [2018-06-12 17:14:56,983]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:14:59,476]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:14:59,501]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 270, in test_edit_success
+    self.login()
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 33, in login
+    click_btn = driver.find_element_by_css_selector("//*[@id='selectData']/div[4]/div")
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_16' class='none'>
+    <td class='errorCase'><div class='testcase'>test_export</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_16' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_16'>error</button>
+    <div id='div_ft6_16' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_16' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_16'>error</button>
+    <div id='div_ft6_16' class="collapse in">
+    <pre>
+    
+ft6_16: [2018-06-12 17:15:03,707]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:15:21,367]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 231, in test_export
+    self.driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[1]/div/button[4]/i").click()
+AttributeError: 'NoneType' object has no attribute 'click'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_17' class='none'>
+    <td class='errorCase'><div class='testcase'>test_export</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_17' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_17'>error</button>
+    <div id='div_ft6_17' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_17' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_17'>error</button>
+    <div id='div_ft6_17' class="collapse in">
+    <pre>
+    
+ft6_17: [2018-06-12 17:15:03,707]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:15:21,367]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 22, in tearDown
+    self.driver.close()
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 596, in close
+    self.execute(Command.CLOSE)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: chrome not reachable
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_18' class='none'>
+    <td class='errorCase'><div class='testcase'>test_query_template_id</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_18' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_18'>error</button>
+    <div id='div_ft6_18' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_18' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_18'>error</button>
+    <div id='div_ft6_18' class="collapse in">
+    <pre>
+    
+ft6_18: [2018-06-12 17:15:24,844]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:15:28,438]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:15:28,470]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 325, in test_query_template_id
+    self.login()
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 33, in login
+    click_btn = driver.find_element_by_css_selector("//*[@id='selectData']/div[4]/div")
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_19' class='none'>
+    <td class='errorCase'><div class='testcase'>test_query_template_key</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_19' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_19'>error</button>
+    <div id='div_ft6_19' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_19' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_19'>error</button>
+    <div id='div_ft6_19' class="collapse in">
+    <pre>
+    
+ft6_19: [2018-06-12 17:15:30,193]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:15:32,713]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:15:32,741]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 343, in test_query_template_key
+    self.login()
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 33, in login
+    click_btn = driver.find_element_by_css_selector("//*[@id='selectData']/div[4]/div")
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_20' class='none'>
+    <td class='errorCase'><div class='testcase'>test_query_template_name</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_20' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_20'>error</button>
+    <div id='div_ft6_20' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_20' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_20'>error</button>
+    <div id='div_ft6_20' class="collapse in">
+    <pre>
+    
+ft6_20: [2018-06-12 17:15:34,925]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:15:37,578]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:15:37,603]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 307, in test_query_template_name
+    self.login()
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 33, in login
+    click_btn = driver.find_element_by_css_selector("//*[@id='selectData']/div[4]/div")
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft6_21' class='none'>
+    <td class='errorCase'><div class='testcase'>test_templatebiaoqian</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_21' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_21'>error</button>
+    <div id='div_ft6_21' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_21' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_21'>error</button>
+    <div id='div_ft6_21' class="collapse in">
+    <pre>
+    
+ft6_21: [2018-06-12 17:15:39,723]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-06-12 17:15:41,972]-log.py[line:29]-fuc:__console-INFO: 欢迎[ca_system_admin]用户，登录成功
+[2018-06-12 17:15:42,000]-log.py[line:29]-fuc:__console-INFO:关闭浏览器
+Traceback (most recent call last):
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 334, in test_templatebiaoqian
+    self.login()
+  File "F:\CINTEL_FZweb3_1_2\CINTEL_FZWEB3_1_2_1\case\Integrative_Query\voicetemplete_add.py", line 33, in login
+    click_btn = driver.find_element_by_css_selector("//*[@id='selectData']/div[4]/div")
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 512, in find_element_by_css_selector
+    return self.find_element(by=By.CSS_SELECTOR, value=css_selector)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 858, in find_element
+    'value': value})['value']
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 311, in execute
+    self.error_handler.check_response(response)
+  File "E:\python3\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 237, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=63.0.3239.108)
+  (Driver info: chromedriver=2.34.522940 (1a76f96f66e3ca7b8e57d503b4dd3bccfba87af1),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>Total</td>
+    <td>62</td>
+    <td>1</td>
+    <td>13</td>
+    <td>48</td>
+    <td>Passing rate: 1.61%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+
+</body>
+</html>

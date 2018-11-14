@@ -1,0 +1,5 @@
+[2018-10-31 17:22:08,177]-log.py[line:29]-fuc:__console-INFO:打开浏览器
+[2018-10-31 17:22:11,592]-log.py[line:29]-fuc:__console-INFO:长途区号输入为空执行用例
+[2018-10-31 17:22:13,537]-log.py[line:29]-fuc:__console-INFO: 欢迎[itim]用户，登录成功
+[2018-10-31 17:22:14,291]-log.py[line:29]-fuc:__console-INFO:所在位置：基础数据 > 国家代码
+[2018-10-31 17:22:49,937]-log.py[line:29]-fuc:__console-INFO:关闭浏览器

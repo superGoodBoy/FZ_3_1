@@ -1,0 +1,36 @@
+１．此脚本暂未实现基类封装，参数化连接数据库，
+２．目录结构
+├─case　　　　       ###########＂测试用例＂############
+│  ├─Authority_case             "管局模式下"
+│  │  ├─calling_greylist_old   ＂主叫灰名单＂
+│  │  │  └─__pycache__
+│  │  └─whitelist　　　　　　　"主叫白名单录入/下发"
+│  │      └─__pycache__
+│  ├─basic_data_case            "基础数据"
+│  │  └─__pycache__
+│  ├─Integrative_Query          "综合查询"
+│  │  └─__pycache__
+│  ├─police_ministries_move      "公安协同联动"
+│  │  └─__pycache__
+│  ├─Prevent_situations          "防范态势"
+│  │  ├─result
+│  │  └─__pycache__
+│  ├─provincial_ministries_move│ "部省协同联动"
+│  ├─cp_bussiness
+│  │  ├─cp_common
+│  │  └─cp_share
+│  ├─system_manage              "系统日志"
+│  ├─user_role                  "权限管理"
+│  │  ├─manage_user
+│  │  └─Userlogin
+│  └─__pycache__
+├─common          ###############＂封装类＂###########
+│  └─__pycache__
+├─console         ##############---"用例执行器"############
+│  └─report
+├─docs
+├─HTMLTestRunner　 ##############＂美化报告模板＂###########
+│  └─__pycache__
+├─logger         ########## ＂日志模块＂############
+│  └─__pycache__
+└─__pycache__
